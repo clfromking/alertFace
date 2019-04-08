@@ -1,33 +1,54 @@
-var data = [
-    {
-        img : 'img/001.jpg',
-        department : '英雄联盟',
-        name : '伊泽瑞尔'
-    }
-]
-var input = {
-    img : '',
-    department : '',
-    name : ''
-};
-var res = {
-    data : data
-}
-var html = template('tpl', res);
-$('.wrap').html(html);
+var data = []
 
 $('.input-btn').on('click', function() {
-    if(data.length > 3){
-        data.shift();
-    }
+    var input = {
+        img : '',
+        department : '',
+        name : ''
+    };
     input.img = $('.input-img').val();
     input.department = $('.input-department').val();
     input.name = $('.input-name').val();
+    if(input.img === ''){
+        return;
+    }
     data.push(input);
-    var html = template('tpl', res);
-    $('.wrap').html(html);
     console.log(data);
-    $('.input-img').val('')
-    $('.input-department').val('')
-    $('.input-name').val('')
+    if(data.length > 3){
+        $('.wrap>.box:first').fadeOut(200, function() {
+            $('.wrap>.box:first').remove();
+            var content = $(`
+            <div class="box">
+                    <div class="top"></div>
+                    <div class="info">
+                        <img src="${data[data.length - 1].img}" alt="" class="info-img">
+                        <div class="info-department">${data[data.length - 1].department}</div>
+                        <div class="info-name">${data[data.length - 1].name}</div>
+                    </div>
+                    <div class="bottom"></div> 
+                </div>
+            `);
+            var $content = $(content);
+            $content.appendTo($('.wrap')).hide().fadeIn(600);
+        });
+        data.shift();
+    }else{
+        var content = $(`
+            <div class="box">
+                    <div class="top"></div>
+                    <div class="info">
+                        <img src="${data[data.length - 1].img}" alt="" class="info-img">
+                        <div class="info-department">${data[data.length - 1].department}</div>
+                        <div class="info-name">${data[data.length - 1].name}</div>
+                    </div>
+                    <div class="bottom"></div> 
+                </div>
+            `);
+            var $content = $(content);
+            $content.appendTo($('.wrap')).hide().fadeIn(600);
+    }
+
+    $('.input-img').val("");
+    $('.input-department').val("");
+    $('.input-name').val("");
 })
