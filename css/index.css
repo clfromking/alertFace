@@ -7,8 +7,10 @@
     height: 600px;
     margin: 50px auto;
     border: 1px solid red;
+    position: relative;
 }
-.wrap:after{
+/* 最开始采用浮动的做法，后来改为三个盒子定位 */
+/* .wrap:after{
     content: '';
     display: block;
     clear: both;
@@ -17,19 +19,26 @@
 }
 .wrap{
     zoom: 1;
-}
+} */
 .box{
     width: 400px;
     height: 500px;
-    margin-right: 50px;
     border: 1px solid black;
-    float: left; 
-    margin-top: 50px;
-    position: relative;
+    position: absolute;
+    top: 50px;
 }
-.wrap .box:first-child{
+.box1{
+    left: 100px;
+}
+.box2{
+    left: 550px;
+}
+.box3{
+    left: 1000px;
+}
+/* .wrap .box:first-child{
     margin-left: 100px;
-}
+} */
 .top{
     width: 400px;
     height: 250px;
